@@ -39,8 +39,9 @@ SELECT * FROM netflix;
 ## Q1. Count of records
 --A1. There are 8807 rows/records in our dataset
 
-
+***sql
 SELECT COUNT(*) as total_content FROM netflix;
+***
 
 
 
@@ -59,6 +60,10 @@ SELECT DISTINCT (director) FROM netflix;
 
 ## Q4. Count the number of Movies vs TV Shows
 --A4. There are 6131 total_content in Movie type and 2676 total_content in TV Show.
+
+## Objective: Determine the distribution of content types on Netflix.
+
+
 
 SELECT type,
 COUNT(*) as total_content 
