@@ -39,9 +39,9 @@ SELECT * FROM netflix;
 ### Q1. Count of records
 --A1. There are 8807 rows/records in our dataset
 
-'''sql
+```sql
 SELECT COUNT(*) as total_content FROM netflix;
-'''
+```
 
 
 
