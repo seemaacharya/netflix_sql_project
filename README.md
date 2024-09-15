@@ -186,28 +186,34 @@ WHERE country = 'South Africa';
 
 
 
---Q14. List all movies that are documentaries.
+## Q14. List all movies that are documentaries.
 
 SELECT * FROM netflix
 WHERE listed_in LIKE '%Documentaries';
 
 
---Q15. Find all content without a director.
+
+
+## Q15. Find all content without a director.
 
 SELECT * FROM netflix
 WHERE director IS NULL;
 
---Q16. Find in how many movie actor 'Salman Khan' appeared in last 10 years.
+
+
+## Q16. Find in how many movie actor 'Salman Khan' appeared in last 10 years.
 --A16. Actor 'Salman Khan' has appeared in 2 movies over the last 10 years. The movies are Prem Ratan Dhan Payo and Paharganj.
 
 SELECT * FROM netflix
 WHERE 
 	casts LIKE '%Salman Khan%'
 	AND 
-	release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10  
+	release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10 
+
+ 
 
 
---Q17. Find the top 10 actors who have appeared in the highest number of movies produced in India.
+## Q17. Find the top 10 actors who have appeared in the highest number of movies produced in India.
 --A17. Anupam Kher is the actor with the highest number of movies produced in India, having appeared in 36 such films.
 
 SELECT 
@@ -220,7 +226,9 @@ ORDER BY 2 DESC
 LIMIT 10;
 
 
-*/Q18:
+
+
+## */Q18:
 Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
 the description field. Label content containing these keywords as 'Bad' and all other 
 content as 'Good'. Count how many items fall into each category.
