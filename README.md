@@ -36,16 +36,16 @@ SELECT * FROM netflix;
 
 
 
-## Q1. Count of records
+### Q1. Count of records
 --A1. There are 8807 rows/records in our dataset
 
-***sql
+***SQL
 SELECT COUNT(*) as total_content FROM netflix;
 ***
 
 
 
-## Q2.How many different or unique contents are there in type
+### Q2.How many different or unique contents are there in type
 --A2. There are 2 unique contents in type- 1.Movie and 2.TV Show
 
 
@@ -53,12 +53,12 @@ SELECT DISTINCT (type) AS content_type
 FROM netflix;
 
 
-## Q3. To check how many different or unique director are there in our data
+### Q3. To check how many different or unique director are there in our data
 
 SELECT DISTINCT (director) FROM netflix;
 
 
-## Q4. Count the number of Movies vs TV Shows
+### Q4. Count the number of Movies vs TV Shows
 --A4. There are 6131 total_content in Movie type and 2676 total_content in TV Show.
 
 ## Objective: Determine the distribution of content types on Netflix.
@@ -70,7 +70,7 @@ COUNT(*) as total_content
 FROM netflix
 GROUP BY type; 
 
-## Q5. Find the most common rating for movies and TV shows
+### Q5. Find the most common rating for movies and TV shows
 --A5. 'TV-MA' is the common rating given for movies and TV Shows.
 
 
@@ -81,7 +81,7 @@ ORDER BY type, COUNT(*) DESC;
 
 
 
-## Q6. List all the movies released in a specific year (eg.2020)
+### Q6. List all the movies released in a specific year (eg.2020)
 
 SELECT * FROM netflix
 WHERE 
@@ -90,7 +90,7 @@ WHERE
 	release_year=2020;
 
 
-## Q7. Find the top 5 countries with the most content on Netflix.
+### Q7. Find the top 5 countries with the most content on Netflix.
 --A7. United States has the higest number of content on Netflix, whereas India holds the 2nd position with the count 1008 contents released on Netflix.
  
  */ARRAY is a kind of LIst that is separated by commas, we see that most of the contries are in
@@ -110,7 +110,7 @@ LIMIT 5;
 
 
 
-## Q8. Identify the longest movie.
+### Q8. Identify the longest movie.
 --A8. 99 min is the longest duration, so below are the list of movies and TV Shows with the longest duration i.e 99 mins.
 
 SELECT * FROM netflix 
@@ -122,7 +122,7 @@ WHERE
  
 
 	
-## Q9. Find content added in the last 5 years.
+### Q9. Find content added in the last 5 years.
 */
 If date_added is not in a date format and contains the month as text, we can use the original
 query with TO_DATE */
@@ -135,7 +135,7 @@ WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years'
 
 
 
-## Q10. Find all the movies or TV Shows by director 'Rajiv Chilaka'
+### Q10. Find all the movies or TV Shows by director 'Rajiv Chilaka'
 
 SELECT *
 FROM (
@@ -147,7 +147,7 @@ WHERE director_name = 'Rajiv Chilaka';
 
 
 
-## Q11. List all the TV Shows with more than 5 seasons.
+### Q11. List all the TV Shows with more than 5 seasons.
 
 
 SELECT *
@@ -162,7 +162,7 @@ WHERE
     
 
 
-## Q12. Count the number of content items in each genres.
+### Q12. Count the number of content items in each genres.
 
 SELECT genre, COUNT(*) AS total_content
 FROM (
@@ -175,7 +175,7 @@ select * from netflix;
 
 
 
-## Q13. Find the average release year for content produced in a specified country.
+### Q13. Find the average release year for content produced in a specified country.
 --A13. For India: The average release year for content produced in India is 2012.
 --For South Africa: The average release year for content produced in South Africa is 2017.
 
@@ -191,7 +191,7 @@ WHERE country = 'South Africa';
 
 
 
-## Q14. List all movies that are documentaries.
+### Q14. List all movies that are documentaries.
 
 SELECT * FROM netflix
 WHERE listed_in LIKE '%Documentaries';
@@ -199,14 +199,14 @@ WHERE listed_in LIKE '%Documentaries';
 
 
 
-## Q15. Find all content without a director.
+### Q15. Find all content without a director.
 
 SELECT * FROM netflix
 WHERE director IS NULL;
 
 
 
-## Q16. Find in how many movie actor 'Salman Khan' appeared in last 10 years.
+### Q16. Find in how many movie actor 'Salman Khan' appeared in last 10 years.
 --A16. Actor 'Salman Khan' has appeared in 2 movies over the last 10 years. The movies are Prem Ratan Dhan Payo and Paharganj.
 
 SELECT * FROM netflix
@@ -218,7 +218,7 @@ WHERE
  
 
 
-## Q17. Find the top 10 actors who have appeared in the highest number of movies produced in India.
+### Q17. Find the top 10 actors who have appeared in the highest number of movies produced in India.
 --A17. Anupam Kher is the actor with the highest number of movies produced in India, having appeared in 36 such films.
 
 SELECT 
@@ -233,7 +233,7 @@ LIMIT 10;
 
 
 
-## */Q18:
+### */Q18:
 Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
 the description field. Label content containing these keywords as 'Bad' and all other 
 content as 'Good'. Count how many items fall into each category.
