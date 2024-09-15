@@ -48,46 +48,51 @@ SELECT COUNT(*) as total_content FROM netflix;
 ### Q2.How many different or unique contents are there in type
 --A2. There are 2 unique contents in type- 1.Movie and 2.TV Show
 
-
+```sql
 SELECT DISTINCT (type) AS content_type
 FROM netflix;
+```
 
 
 ### Q3. To check how many different or unique director are there in our data
 
+```sql
 SELECT DISTINCT (director) FROM netflix;
-
+```sql
 
 ### Q4. Count the number of Movies vs TV Shows
 --A4. There are 6131 total_content in Movie type and 2676 total_content in TV Show.
 
-## Objective: Determine the distribution of content types on Netflix.
-
-
-
+```sql
 SELECT type,
 COUNT(*) as total_content 
 FROM netflix
-GROUP BY type; 
+GROUP BY type;
+```
+
+### Objective: Determine the distribution of content types on Netflix.
+
 
 ### Q5. Find the most common rating for movies and TV shows
 --A5. 'TV-MA' is the common rating given for movies and TV Shows.
 
-
+```sql
 SELECT DISTINCT ON (type) type, rating
 FROM netflix
 GROUP BY type, rating
 ORDER BY type, COUNT(*) DESC;
-
+```
 
 
 ### Q6. List all the movies released in a specific year (eg.2020)
 
+```sql
 SELECT * FROM netflix
 WHERE 
 	type='Movie'
 	AND 
 	release_year=2020;
+```
 
 
 ### Q7. Find the top 5 countries with the most content on Netflix.
@@ -97,7 +102,7 @@ WHERE
 one line separated by commas, so we are using string to array. Then we are unnesting the array using UNNEST function.
 */
 
-
+```sql
 SELECT new_country, COUNT(*) AS total_content
 FROM (
     SELECT UNNEST(STRING_TO_ARRAY(country, ',')) AS new_country
@@ -106,6 +111,7 @@ FROM (
 GROUP BY new_country
 ORDER BY total_content DESC
 LIMIT 5;
+```
 
 
 
@@ -113,11 +119,13 @@ LIMIT 5;
 ### Q8. Identify the longest movie.
 --A8. 99 min is the longest duration, so below are the list of movies and TV Shows with the longest duration i.e 99 mins.
 
+```sql
 SELECT * FROM netflix 
 WHERE 
 	type= 'Movie'
 	AND
 	duration=(SELECT MAX(duration) FROM netflix);
+```
 
  
 
@@ -127,29 +135,32 @@ WHERE
 If date_added is not in a date format and contains the month as text, we can use the original
 query with TO_DATE */
 
-
+```sql
 SELECT
 *
 FROM netflix
 WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years';
+```
 
 
 
 ### Q10. Find all the movies or TV Shows by director 'Rajiv Chilaka'
 
+```sql
 SELECT *
 FROM (
     SELECT *, UNNEST(STRING_TO_ARRAY(director, ',')) AS director_name
     FROM netflix
 ) AS directors
 WHERE director_name = 'Rajiv Chilaka';
+```
 
 
 
 
 ### Q11. List all the TV Shows with more than 5 seasons.
 
-
+```sql
 SELECT *
 FROM netflix
 WHERE 
@@ -158,12 +169,14 @@ WHERE
     duration LIKE '%Seasons'  -- Ensures we're only looking at entries with "Seasons"
     AND 
     CAST(SPLIT_PART(duration, ' ', 1) AS INTEGER) > 5;
+```
 
     
 
 
 ### Q12. Count the number of content items in each genres.
 
+```sql
 SELECT genre, COUNT(*) AS total_content
 FROM (
     SELECT UNNEST(STRING_TO_ARRAY(listed_in, ',')) AS genre
@@ -172,6 +185,7 @@ FROM (
 GROUP BY genre;
 
 select * from netflix;
+```
 
 
 
@@ -179,41 +193,50 @@ select * from netflix;
 --A13. For India: The average release year for content produced in India is 2012.
 --For South Africa: The average release year for content produced in South Africa is 2017.
 
---For India-
+### For India-
+```sql
 SELECT ROUND(AVG(release_year)) AS average_release_year
 FROM netflix
 WHERE country = 'India';
+```
 
---For South Africa
+### For South Africa
+```sql
 SELECT ROUND(AVG(release_year)) AS average_release_year
 FROM netflix
 WHERE country = 'South Africa';
+```
 
 
 
 ### Q14. List all movies that are documentaries.
 
+```sql
 SELECT * FROM netflix
 WHERE listed_in LIKE '%Documentaries';
-
+```
 
 
 
 ### Q15. Find all content without a director.
 
+```sql
 SELECT * FROM netflix
 WHERE director IS NULL;
+```
 
 
 
 ### Q16. Find in how many movie actor 'Salman Khan' appeared in last 10 years.
 --A16. Actor 'Salman Khan' has appeared in 2 movies over the last 10 years. The movies are Prem Ratan Dhan Payo and Paharganj.
 
+```sql
 SELECT * FROM netflix
 WHERE 
 	casts LIKE '%Salman Khan%'
 	AND 
-	release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10 
+	release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
+```
 
  
 
@@ -221,6 +244,7 @@ WHERE
 ### Q17. Find the top 10 actors who have appeared in the highest number of movies produced in India.
 --A17. Anupam Kher is the actor with the highest number of movies produced in India, having appeared in 36 such films.
 
+```sql
 SELECT 
 	UNNEST(STRING_TO_ARRAY(casts, ',')) as actor,
 	COUNT(*)
@@ -229,6 +253,7 @@ WHERE country = 'India'
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 10;
+```
 
 
 
@@ -240,6 +265,7 @@ content as 'Good'. Count how many items fall into each category.
 */
 --A18. There are 251 Bad movie type, 5880 Good movie type whereas 91 Bad TV Show and 2585 Good TV Show.
 
+```sql
 SELECT 
     category,
 	TYPE,
@@ -255,6 +281,11 @@ FROM (
 ) AS categorized_content
 GROUP BY 1,2
 ORDER BY 2
+```
+
+
+
+
 
 
 
